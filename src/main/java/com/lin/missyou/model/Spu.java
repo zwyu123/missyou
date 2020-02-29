@@ -5,7 +5,9 @@ import lombok.Setter;
 
 import javax.persistence.Entity;
 import javax.persistence.Id;
+import javax.persistence.JoinColumn;
 import java.util.Date;
+import java.util.List;
 
 @Entity
 @Getter
@@ -28,4 +30,13 @@ public class Spu extends BaseEntity {
     private Boolean isTest;
 
     private String forThemeImg;
+
+    @JoinColumn(name = "spuId")
+    private List<Sku> skuList;
+
+    @JoinColumn(name = "spuId")
+    private List<SpuImg> spuImgList;
+
+    @JoinColumn(name = "spuId")
+    private List<SpuDetailImg> spuDetailImgList;
 }
