@@ -1,10 +1,15 @@
 package com.lin.missyou.core.interceptors;
 
 import com.auth0.jwt.interfaces.Claim;
+import com.lin.missyou.core.LocalUser;
 import com.lin.missyou.exception.http.ForbiddenException;
 import com.lin.missyou.exception.http.UnAuthenticatedException;
+import com.lin.missyou.model.User;
+import com.lin.missyou.service.UserService;
 import com.lin.missyou.util.JwtToken;
 import org.apache.commons.lang3.StringUtils;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 import org.springframework.web.method.HandlerMethod;
 import org.springframework.web.servlet.ModelAndView;
 import org.springframework.web.servlet.handler.HandlerInterceptorAdapter;
@@ -14,7 +19,11 @@ import javax.servlet.http.HttpServletResponse;
 import java.util.Map;
 import java.util.Optional;
 
+@Component
 public class PermissionInterceptor extends HandlerInterceptorAdapter {
+
+    @Autowired
+    private UserService userService;
 
     public PermissionInterceptor() {
         super();
@@ -44,7 +53,17 @@ public class PermissionInterceptor extends HandlerInterceptorAdapter {
                 ()-> new UnAuthenticatedException(10004));
 
         boolean valid = this.hasPermission(scopeLevel.get(), map);
+        if (valid) {
+            this.setToThreadLocal(map);
+        }
         return valid;
+    }
+
+    private void setToThreadLocal(Map<String, Claim> map) {
+        Long uid = map.get("uid").asLong();
+        Integer scope = map.get("scope").asInt();
+        User user = userService.getUserById(uid);
+        LocalUser.set(user, scope);
     }
 
     private boolean hasPermission(ScopeLevel scopeLevel, Map<String, Claim> map) {
@@ -63,6 +82,7 @@ public class PermissionInterceptor extends HandlerInterceptorAdapter {
 
     @Override
     public void afterCompletion(HttpServletRequest request, HttpServletResponse response, Object handler, Exception ex) throws Exception {
+        LocalUser.clear();
         super.afterCompletion(request, response, handler, ex);
     }
 
