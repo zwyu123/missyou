@@ -17,15 +17,11 @@ public class Paging<T> {
     private Integer totalPage;
     private List<T> items;
 
-    public Paging(Page<T> pageT) {
-        this.initPageParameters(pageT);
-        this.items = pageT.getContent();
-    }
-
-    void initPageParameters(Page<T> pageT) {
-        this.total = pageT.getTotalElements();
-        this.count = pageT.getSize();
-        this.page = pageT.getNumber();
-        this.totalPage = pageT.getTotalPages();
+    public Paging(Page<T> page) {
+        this.total = page.getTotalElements();
+        this.count = page.getSize();
+        this.page = page.getNumber();
+        this.totalPage = page.getTotalPages();
+        this.items = page.getContent();
     }
 }

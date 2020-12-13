@@ -6,10 +6,14 @@ spring:
   jpa:
     properties:
       hibernate:
+        # 控制台打印sql
         show_sql: true
+        # 格式化sql语句
         format_sql: true
 
 missyou:
   security:
     jwt-key: 7777777yue
     token-expired-in: 86400000
+  order:
+    max-sku-limit: 777

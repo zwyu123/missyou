@@ -27,6 +27,7 @@ public class GlobalExceptionAdvice {
         String requestUrl = req.getRequestURI();
         String method = req.getMethod();
         System.out.println(e);
+        e.printStackTrace();
         UnifyResponse message = new UnifyResponse(9999, "服务器异常", method + " " + requestUrl);
         return message;
     }

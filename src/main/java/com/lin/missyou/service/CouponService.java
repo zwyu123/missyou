@@ -69,7 +69,7 @@ public class CouponService {
         }
 
         this.userCouponRepository
-                .findFirstByUserIdAAndCouponId(uid, couponId)
+                .findFirstByUserIdAndCouponId(uid, couponId)
                 .ifPresent((uc) -> new ParameterException(40006));
 
         UserCoupon userCouponNew = UserCoupon.builder()

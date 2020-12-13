@@ -1,5 +1,6 @@
 package com.lin.missyou.service;
 
+import com.lin.missyou.exception.http.NotFoundException;
 import com.lin.missyou.model.Banner;
 import com.lin.missyou.repository.BannerRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -11,6 +12,10 @@ public class BannerService {
     private BannerRepository bannerRepository;
 
     public Banner getByName(String name) {
-        return bannerRepository.findOneByName(name);
+        Banner banner = bannerRepository.findOneByName(name);
+        if (banner == null) {
+            throw new NotFoundException(3005);
+        }
+        return banner;
     }
 }

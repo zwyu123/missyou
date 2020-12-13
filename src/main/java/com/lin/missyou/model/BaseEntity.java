@@ -10,7 +10,7 @@ import java.util.Date;
 @Getter
 @Setter
 @MappedSuperclass
-public class BaseEntity {
+public abstract class BaseEntity {
 
     @JsonIgnore
     private Date createTime;

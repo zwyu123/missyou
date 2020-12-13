@@ -4,10 +4,7 @@ import lombok.Getter;
 import lombok.Setter;
 import org.hibernate.annotations.Where;
 
-import javax.persistence.Entity;
-import javax.persistence.FetchType;
-import javax.persistence.JoinColumn;
-import javax.persistence.OneToMany;
+import javax.persistence.*;
 import java.util.Date;
 import java.util.List;
 
@@ -16,6 +13,7 @@ import java.util.List;
 @Setter
 @Where(clause = "delete_time is null and online = 1")
 public class Activity extends BaseEntity {
+    @Id
     private Long id;
     private String title;
     private String name;

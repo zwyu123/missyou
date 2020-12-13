@@ -24,7 +24,7 @@ public interface CouponRepository extends JpaRepository<Coupon, Long> {
 
     @Query("select c from Coupon c " +
             "join UserCoupon uc " +
-            "on c.id = us.couponid " +
+            "on c.id = uc.couponId " +
             "join User u " +
             "on u.id = uc.userId " +
             "where uc.status = 1 " +

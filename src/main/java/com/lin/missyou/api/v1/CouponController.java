@@ -4,7 +4,6 @@ import com.lin.missyou.core.LocalUser;
 import com.lin.missyou.core.UnifyResponse;
 import com.lin.missyou.core.enumeration.CouponStatus;
 import com.lin.missyou.core.interceptors.ScopeLevel;
-import com.lin.missyou.exception.CreateSuccess;
 import com.lin.missyou.exception.http.ParameterException;
 import com.lin.missyou.model.Coupon;
 import com.lin.missyou.model.User;

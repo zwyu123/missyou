@@ -15,7 +15,6 @@ public class AutoPrefixUrlMapping extends RequestMappingHandlerMapping {
     @Override
     protected RequestMappingInfo getMappingForMethod(Method method, Class<?> handlerType) {
         RequestMappingInfo mappingInfo =  super.getMappingForMethod(method, handlerType);
-        String packageName = this.getPrefix(handlerType);
         if (mappingInfo != null) {
             String prefix = this.getPrefix(handlerType);
             return RequestMappingInfo.paths(prefix).build().combine(mappingInfo);

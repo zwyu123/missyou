@@ -5,7 +5,9 @@ spring:
     hibernate:
       ddl-auto: none
   jackson:
+    # 返回下划线变量名
     property-naming-strategy: SNAKE_CASE
+    # 时间返回时间戳
     serialization:
       WRITE_DATES_AS_TIMESTAMPS: true
 
